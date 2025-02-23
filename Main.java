@@ -7,7 +7,8 @@ class Main{
     while(answer != 7){
       printInstructions();
       answer = userInput.nextInt();
-    }    
+    }
+    LibraryManager lib = new LibraryManager();
   }
 
   static void printInstructions(){
