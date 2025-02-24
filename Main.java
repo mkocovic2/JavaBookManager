@@ -8,6 +8,7 @@ class Main{
       printInstructions();
       answer = userInput.nextInt();
     }
+    userInput.close();
     LibraryManager lib = new LibraryManager();
   }
 
