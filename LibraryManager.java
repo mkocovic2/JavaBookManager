@@ -24,6 +24,7 @@ public class LibraryManager{
                 Book createdBook = new Book(dataFields[0], dataFields[1], dataFields[2], dataFields[3]);
                 bookList.add(createdBook);
             }
+            myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -40,6 +41,7 @@ public class LibraryManager{
                 User createdUser = new User(dataFields[0], dataFields[1], dataFields[2]);
                 userList.add(createdUser);
             }
+            myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
