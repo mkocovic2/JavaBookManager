@@ -6,13 +6,26 @@ import java.util.Scanner;
 
 public class LibraryManager{
     private LibraryManager libmanager = null; 
-    private List<Book> bookList = new ArrayList<>();
-    private List<User> userList = new ArrayList<>(); 
+    private final List<Book> bookList = new ArrayList<>();
+    private final List<User> userList = new ArrayList<>(); 
     
     LibraryManager(){
         populateBooksList();
         populateUserList();
     }
+
+    public void displayAllBooks(){
+        for(int i = 0; i < bookList.size(); i++){
+            System.out.println(bookList.get(i).getAllBookInfo());
+        }
+    }
+
+    public void displayAllUsers(){
+        for(int i = 0; i < userList.size(); i++){
+            System.out.println(userList.get(i).getAllUserInfo());
+        }
+    }
+
 
     private void populateBooksList(){
         try {

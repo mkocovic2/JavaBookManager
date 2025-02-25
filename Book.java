@@ -59,7 +59,7 @@ public class Book {
     }
 
     // Get all details of the book
-    public String getAll() {
+    public String getAllBookInfo() {
         return "Title: " + bookTitle + ", Author: " + bookAuthor +
                ", ISBN: " + bookIsbn + ", Year: " + bookYear +
                ", Borrowed: " + bookBorrowed;

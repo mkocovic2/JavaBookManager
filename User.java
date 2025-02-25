@@ -38,7 +38,7 @@ public class User {
     }
 
     // Get all details of the user
-    public String getAll() {
+    public String getAllUserInfo() {
         return "User ID: " + userId + ", Name: " + firstName + " " + lastName;
     }
 }

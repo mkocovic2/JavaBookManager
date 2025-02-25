@@ -1,15 +1,20 @@
 import java.util.Scanner;
 class Main{
   public static void main(String[] args) {
+    LibraryManager lib = new LibraryManager();
     Scanner userInput = new Scanner(System.in);
     int answer = 0; 
     System.out.println("Welcome to the library!\n");
     while(answer != 7){
       printInstructions();
       answer = userInput.nextInt();
+      if(answer == 1){
+        lib.displayAllBooks();
+      } else if (answer == 2){
+        lib.displayAllUsers();
+      }
     }
     userInput.close();
-    LibraryManager lib = new LibraryManager();
   }
 
   static void printInstructions(){
