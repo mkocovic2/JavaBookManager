@@ -8,11 +8,29 @@ class Main{
     while(answer != 7){
       printInstructions();
       answer = userInput.nextInt();
-      if(answer == 1){
-        lib.displayAllBooks();
-      } else if (answer == 2){
-        lib.displayAllUsers();
-      }
+      switch (answer) {
+            case 1 -> lib.displayAllBooks();
+            case 2 -> lib.displayAllUsers();
+            case 3 -> {
+                System.out.print("Enter user credentials: ");
+                String userCred = userInput.nextLine();
+                lib.displayUserInformation(userCred);
+            }
+            case 4 -> {
+                System.out.print("Enter book ISBN: ");
+                String bookIsbn = userInput.nextLine();
+                lib.displayBookInformation(bookIsbn);
+            }
+            case 5 -> {
+                System.out.print("Enter user ID: ");
+                String userId = userInput.nextLine();
+                System.out.print("Enter book ISBN: ");
+                String bookIsbn = userInput.nextLine();
+                lib.borrowBook(userId, bookIsbn);
+            }
+            case 7 -> System.out.println("Exiting the library system...");
+            default -> System.out.println("Invalid choice. Please try again.");
+        }
     }
     userInput.close();
   }

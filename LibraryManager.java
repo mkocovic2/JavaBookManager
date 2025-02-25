@@ -26,6 +26,28 @@ public class LibraryManager{
         }
     }
 
+    public void displayUserInformation(String userId){
+        for(int i = 0; i < userList.size(); i++){
+            if(userList.get(i).getUserId().equals(userId)){
+                System.out.println(userList.get(i).getAllUserInfo());
+                break;
+            }
+        }
+    }
+
+    public void displayBookInformation(String bookIsbn){
+        for(int i = 0; i < bookList.size(); i++){
+            if(bookList.get(i).getBookIsbn().equals(bookIsbn)){
+                System.out.println(bookList.get(i).getAllBookInfo());
+                break;
+            }
+        }
+    }
+
+    public void borrowBook(String userId, String bookIsbn){
+        
+    }
+
 
     private void populateBooksList(){
         try {
