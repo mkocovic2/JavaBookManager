@@ -63,6 +63,8 @@ public class LibraryManager{
         } else {
           System.out.println("This book has been borrowed already");
         }
+      } else {
+        System.out.println("Invalid user or book ISBN");
       }
     }
     

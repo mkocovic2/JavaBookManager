@@ -1,39 +1,43 @@
 import java.util.Scanner;
-class Main{
+class Main {
   public static void main(String[] args) {
-    LibraryManager lib = LibraryManager.getInstance();
-    Scanner userInput = new Scanner(System.in);
-    int answer = 0; 
-    System.out.println("Welcome to the library!\n");
-    while(answer != 7){
-      printInstructions();
-      answer = userInput.nextInt();
-      switch (answer) {
-            case 1 -> lib.displayAllBooks();
-            case 2 -> lib.displayAllUsers();
-            case 3 -> {
-                System.out.print("Enter user credentials: ");
-                String userCred = userInput.nextLine();
-                lib.displayUserInformation(userCred);
-            }
-            case 4 -> {
-                System.out.print("Enter book ISBN: ");
-                String bookIsbn = userInput.nextLine();
-                lib.displayBookInformation(bookIsbn);
-            }
-            case 5 -> {
-                userInput.nextLine();
-                System.out.print("Enter user ID: ");
-                String userId = userInput.nextLine();
-                System.out.print("Enter book ISBN: ");
-                String bookIsbn = userInput.nextLine();
-                lib.borrowBook(userId, bookIsbn);
-            }
-            case 7 -> System.out.println("Exiting the library system...");
-            default -> System.out.println("Invalid choice. Please try again.");
-        }
+    try {
+      LibraryManager lib = LibraryManager.getInstance();
+      Scanner userInput = new Scanner(System.in);
+      int answer = 0; 
+      System.out.println("Welcome to the library!\n");
+      while(answer != 7){
+        printInstructions();
+        answer = userInput.nextInt();
+        switch (answer) {
+              case 1 -> lib.displayAllBooks();
+              case 2 -> lib.displayAllUsers();
+              case 3 -> {
+                  System.out.print("Enter user credentials: ");
+                  String userCred = userInput.nextLine();
+                  lib.displayUserInformation(userCred);
+              }
+              case 4 -> {
+                  System.out.print("Enter book ISBN: ");
+                  String bookIsbn = userInput.nextLine();
+                  lib.displayBookInformation(bookIsbn);
+              }
+              case 5 -> {
+                  userInput.nextLine();
+                  System.out.print("Enter user ID: ");
+                  String userId = userInput.nextLine();
+                  System.out.print("Enter book ISBN: ");
+                  String bookIsbn = userInput.nextLine();
+                  lib.borrowBook(userId, bookIsbn);
+              }
+              case 7 -> System.out.println("Exiting the library system...");
+              default -> System.out.println("Invalid choice. Please try again.");
+          }
+      }
+      userInput.close();
+    } catch (Exception e) {
+      System.out.println("Invalid operation, please enter the correct value");
     }
-    userInput.close();
   }
 
   static void printInstructions(){
