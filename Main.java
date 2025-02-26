@@ -1,7 +1,7 @@
 import java.util.Scanner;
 class Main{
   public static void main(String[] args) {
-    LibraryManager lib = new LibraryManager();
+    LibraryManager lib = LibraryManager.getInstance();
     Scanner userInput = new Scanner(System.in);
     int answer = 0; 
     System.out.println("Welcome to the library!\n");

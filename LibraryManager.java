@@ -6,13 +6,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LibraryManager{
-    private LibraryManager libmanager = null; 
+    private static LibraryManager instance = null; 
     private final List<Book> bookList = new ArrayList<>();
     private final List<User> userList = new ArrayList<>(); 
     private final HashMap<String, Book> bookHash = new HashMap<>();
     private final HashMap<String, User> userHash = new HashMap<>();
-    
-    LibraryManager(){
+
+    public static LibraryManager getInstance(){
+      if(instance == null){
+        instance = new LibraryManager();
+      }
+      return instance; 
+    }
+
+    private LibraryManager(){
         populateBooksList();
         populateUserList();
     }
@@ -48,10 +55,11 @@ public class LibraryManager{
     }
 
     public void borrowBook(String userId, String bookIsbn){
-        Book retrievedBook = bookHash.get(bookIsbn);
+      if(userHash.containsKey(userId) && bookHash.containsKey(bookIsbn)){
+          
+      }
     }
-
-
+    
     private void populateBooksList(){
         try {
             File bookFile = new File("books.txt");
