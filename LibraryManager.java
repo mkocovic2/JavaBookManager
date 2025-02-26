@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;  
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,6 +9,8 @@ public class LibraryManager{
     private LibraryManager libmanager = null; 
     private final List<Book> bookList = new ArrayList<>();
     private final List<User> userList = new ArrayList<>(); 
+    private final HashMap<String, Book> bookHash = new HashMap<>();
+    private final HashMap<String, User> userHash = new HashMap<>();
     
     LibraryManager(){
         populateBooksList();
@@ -45,7 +48,7 @@ public class LibraryManager{
     }
 
     public void borrowBook(String userId, String bookIsbn){
-        
+        Book retrievedBook = bookHash.get(bookIsbn);
     }
 
 
@@ -57,6 +60,7 @@ public class LibraryManager{
                 String data = myReader.nextLine();
                 String[] dataFields = data.split(", ?");
                 Book createdBook = new Book(dataFields[0], dataFields[1], dataFields[2], dataFields[3]);
+                bookHash.put(createdBook.getBookIsbn(), createdBook);
                 bookList.add(createdBook);
             }
             myReader.close();
@@ -74,6 +78,7 @@ public class LibraryManager{
                 String data = myReader.nextLine();
                 String[] dataFields = data.split(", ?");
                 User createdUser = new User(dataFields[0], dataFields[1], dataFields[2]);
+                userHash.put(createdUser.getUserId(), createdUser);
                 userList.add(createdUser);
             }
             myReader.close();
