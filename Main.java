@@ -22,6 +22,7 @@ class Main{
                 lib.displayBookInformation(bookIsbn);
             }
             case 5 -> {
+                userInput.nextLine();
                 System.out.print("Enter user ID: ");
                 String userId = userInput.nextLine();
                 System.out.print("Enter book ISBN: ");

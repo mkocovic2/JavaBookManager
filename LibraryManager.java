@@ -56,7 +56,13 @@ public class LibraryManager{
 
     public void borrowBook(String userId, String bookIsbn){
       if(userHash.containsKey(userId) && bookHash.containsKey(bookIsbn)){
-          
+        Book retrievedBook = bookHash.get(bookIsbn);
+        if(retrievedBook.isBookBorrowed() == false){
+          retrievedBook.setBookBorrowed(true);
+          System.out.println(retrievedBook.getBookTitle() + " has been borrowed");
+        } else {
+          System.out.println("This book has been borrowed already");
+        }
       }
     }
     
