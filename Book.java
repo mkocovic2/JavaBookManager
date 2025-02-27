@@ -4,6 +4,7 @@ public class Book {
     private String bookIsbn;
     private String bookYear;
     private boolean bookBorrowed = false;
+    private String borrowerId = "Available";
 
     // Constructor
     public Book(String bookTitle, String bookAuthor, String bookIsbn, String bookYear) {
@@ -58,10 +59,19 @@ public class Book {
         this.bookBorrowed = bookBorrowed;
     }
 
+    public void setBorrowerId(String borrowerId){
+        this.borrowerId = borrowerId;
+    }
+
+    public String getBorrowerId(){
+        return this.borrowerId;
+    }
+
     // Get all details of the book
     public String getAllBookInfo() {
-        return "Title: " + bookTitle + ", Author: " + bookAuthor +
+        String seperator = "-----------------------------------------------------\n";
+        return  seperator + "Title: " + bookTitle + ", Author: " + bookAuthor +
                ", ISBN: " + bookIsbn + ", Year: " + bookYear +
-               ", Borrowed: " + bookBorrowed;
+               ", Borrower ID: " + borrowerId + ", Borrowed: " + bookBorrowed;
     }
 }

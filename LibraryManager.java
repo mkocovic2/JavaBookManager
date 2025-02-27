@@ -1,5 +1,5 @@
 import java.io.File;
-import java.io.FileNotFoundException;  
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,8 +20,7 @@ public class LibraryManager{
     }
 
     private LibraryManager(){
-        populateBooksList();
-        populateUserList();
+        readData();
     }
 
     public void displayAllBooks(){
@@ -67,7 +66,46 @@ public class LibraryManager{
         System.out.println("Invalid user or book ISBN");
       }
     }
-    
+
+    void readData() {
+        try {
+            // Create a scanner that reads from the file
+            Scanner scanner = new Scanner(new File("java_hw1_input.txt"));
+            
+            // Read books
+            int bookCount = Integer.parseInt(scanner.nextLine());
+            
+            for (int i = 0; i < bookCount; i++) {
+                String title = scanner.nextLine();
+                String author = scanner.nextLine();
+                String isbn = scanner.nextLine();
+                String year = scanner.nextLine();
+            
+                Book book = new Book(title, author, isbn, year);
+                bookList.add(book);
+                bookHash.put(book.getBookIsbn(), book);
+            }
+        
+            // Read users
+            int userCount = Integer.parseInt(scanner.nextLine());
+        
+            for (int i = 0; i < userCount; i++) {
+                String firstName = scanner.nextLine();
+                String lastName = scanner.nextLine();
+                String userId = scanner.nextLine();
+            
+                User user = new User(firstName, lastName, userId);
+                userList.add(user);
+                userHash.put(user.getUserId(), user);
+            }
+        
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.err.println("Error: Could not find file 'java_hw1_input.txt'");
+            e.printStackTrace();
+        }
+    }
+    /* 
     private void populateBooksList(){
         try {
             File bookFile = new File("books.txt");
@@ -85,7 +123,9 @@ public class LibraryManager{
             e.printStackTrace();
         }
     }
+    */
 
+    /*
     private void populateUserList(){
         try {
             File bookFile = new File("users.txt");
@@ -103,4 +143,5 @@ public class LibraryManager{
             e.printStackTrace();
         }
     }
+    */
 }
