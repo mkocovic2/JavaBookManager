@@ -59,6 +59,7 @@ public class Book {
         this.bookBorrowed = bookBorrowed;
     }
 
+    // Getter and Setter for borrowerId
     public void setBorrowerId(String borrowerId){
         this.borrowerId = borrowerId;
     }
@@ -69,8 +70,7 @@ public class Book {
 
     // Get all details of the book
     public String getAllBookInfo() {
-        String seperator = "-----------------------------------------------------\n";
-        return  seperator + "Title: " + bookTitle + ", Author: " + bookAuthor +
+        return  "Title: " + bookTitle + ", Author: " + bookAuthor +
                ", ISBN: " + bookIsbn + ", Year: " + bookYear +
                ", Borrower ID: " + borrowerId + ", Borrowed: " + bookBorrowed;
     }

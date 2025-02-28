@@ -2,6 +2,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String userId;
+    private String bookBorrowed = "None";
 
     // Constructor
     public User(String firstName, String lastName, String userId) {
@@ -37,8 +38,17 @@ public class User {
         this.userId = userId;
     }
 
+    // Getter and Setter for bookBorrowed
+    public String getBookBorrowed(){
+        return this.bookBorrowed;
+    }
+
+    public void setBookBorrowed(String bookBorrowed){
+        this.bookBorrowed = bookBorrowed;
+    }
+
     // Get all details of the user
     public String getAllUserInfo() {
-        return "User ID: " + userId + ", Name: " + firstName + " " + lastName;
+        return "User ID: " + userId + ", Name: " + firstName + " " + lastName + ", Book Borrowed: " + bookBorrowed; 
     }
 }

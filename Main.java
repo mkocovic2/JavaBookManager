@@ -1,3 +1,11 @@
+/**
+* -----------------------------------------------------------
+* Author: Michael Kocovic
+* Date: 2/28/25
+* Assignment: Java OOP Assignment
+* -----------------------------------------------------------
+*/
+
 import java.util.Scanner;
 
 class Main {
@@ -12,21 +20,26 @@ class Main {
             while(runProgram) {
                 printInstructions();
                 answer = userInput.nextInt();
-                userInput.nextLine();  // Consume the newline character
+                userInput.nextLine(); 
                 
                 switch (answer) {
+                    // Display all the books
                     case 1 -> lib.displayAllBooks();
+                    // Display all the users
                     case 2 -> lib.displayAllUsers();
+                    // Display specific user information
                     case 3 -> {
                         System.out.print("Enter user credentials: ");
                         String userCred = userInput.nextLine();
                         lib.displayUserInformation(userCred);
                     }
+                    // Display specific book information
                     case 4 -> {
                         System.out.print("Enter book ISBN: ");
                         String bookIsbn = userInput.nextLine();
                         lib.displayBookInformation(bookIsbn);
                     }
+                    // Borrow book using user id and book isbn 
                     case 5 -> {
                         System.out.print("Enter user ID: ");
                         String userId = userInput.nextLine();
@@ -34,6 +47,7 @@ class Main {
                         String bookIsbn = userInput.nextLine();
                         lib.borrowBook(userId, bookIsbn);
                     }
+                    // Return book using user id and book isbn (User must have borrowed the book)
                     case 6 -> {
                         System.out.print("Enter user ID: ");
                         String userId = userInput.nextLine();
@@ -41,6 +55,7 @@ class Main {
                         String bookIsbn = userInput.nextLine();
                         lib.returnBook(userId, bookIsbn);
                     }
+                    // End loop
                     case 7 -> runProgram = false;
                     default -> System.out.println("Invalid choice. Please try again.");
                 }
@@ -53,6 +68,11 @@ class Main {
         }
     }
     
+    /**
+    * Displays the menu of available options to the user.
+    * Prints a numbered list of all library system functions
+    * that the user can choose from.
+    */
     static void printInstructions() {
         System.out.println("Choose one of the following options (number)\n");
         System.out.println("1. Display all books");
