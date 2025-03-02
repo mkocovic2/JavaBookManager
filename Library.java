@@ -9,7 +9,7 @@ public class Library{
     private static Library instance = null; 
     private final List<Book> bookList = new ArrayList<>();
     private final List<User> userList = new ArrayList<>(); 
-    private final HashMap<String, Book> bookHash = new HashMap<>();
+    private final HashMap<String, Book> bookHash = new HashMap<>(); // Used a hashmap for quicker loop up
     private final HashMap<String, User> userHash = new HashMap<>();
     String border = "-------------------------------------------------------------------------------";
     
@@ -31,47 +31,8 @@ public class Library{
     * Initializes the library by reading data from file.
     */
     private Library(){
-        readData();
-    }
-    
-    /**
-    * Reads book and user data from the input file and populates
-    * the library's collections.
-    */
-    private void readData() {
-        try {
-            Scanner scanner = new Scanner(new File("java_hw1_input.txt"));
-            
-            int bookCount = Integer.parseInt(scanner.nextLine());
-            
-            for (int i = 0; i < bookCount; i++) {
-                String title = scanner.nextLine();
-                String author = scanner.nextLine();
-                String isbn = scanner.nextLine();
-                String year = scanner.nextLine();
-            
-                Book book = new Book(title, author, isbn, year);
-                bookList.add(book);
-                bookHash.put(book.getBookIsbn(), book);
-            }
-        
-            int userCount = Integer.parseInt(scanner.nextLine());
-        
-            for (int i = 0; i < userCount; i++) {
-                String firstName = scanner.nextLine();
-                String lastName = scanner.nextLine();
-                String userId = scanner.nextLine();
-            
-                User user = new User(firstName, lastName, userId);
-                userList.add(user);
-                userHash.put(user.getUserId(), user);
-            }
-        
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            System.err.println("Error: Could not find file 'java_hw1_input.txt'");
-            e.printStackTrace();
-        }
+        populateUserList();
+        populateBooksList();
     }
 
     /**
@@ -103,11 +64,11 @@ public class Library{
     */
     public void displayUserInformation(String userId){
         System.out.println(border);
-        for(int i = 0; i < userList.size(); i++){
-            if(userList.get(i).getUserId().equals(userId)){
-                System.out.println(userList.get(i).getAllUserInfo());
-                break;
-            }
+        User user = userHash.get(userId);
+        if (user != null) {
+            System.out.println(user.getAllUserInfo());
+        } else {
+            System.out.println("User not found.");
         }
         System.out.println(border);
     }
@@ -119,11 +80,11 @@ public class Library{
     */
     public void displayBookInformation(String bookIsbn){
         System.out.println(border);
-        for(int i = 0; i < bookList.size(); i++){
-            if(bookList.get(i).getBookIsbn().equals(bookIsbn)){
-                System.out.println(bookList.get(i).getAllBookInfo());
-                break;
-            }
+        Book book = bookHash.get(bookIsbn);
+        if (book != null) {
+            System.out.println(book.getAllBookInfo());
+        } else {
+            System.out.println("Book not found.");
         }
         System.out.println(border);
     }
@@ -140,19 +101,28 @@ public class Library{
         System.out.println(border);
         if (!userHash.containsKey(userId)) {
             System.out.println("Error: User ID " + userId + " does not exist.");
+            System.out.println(border);
             return;
         }
         
         if (!bookHash.containsKey(bookIsbn)) {
             System.out.println("Error: Book with ISBN " + bookIsbn + " does not exist.");
+            System.out.println(border);
             return;
         }
         
         Book book = bookHash.get(bookIsbn);
         User user = userHash.get(userId);
-        
+
         if (book.isBookBorrowed()) {
             System.out.println("Error: " + book.getBookTitle() + " is already borrowed by user " + book.getBorrowerId() + ".");
+            System.out.println(border);
+            return;
+        }
+
+        if(!user.getBookBorrowed().equals("None")){
+            System.out.println("Error: User has already checked out a book, " + user.getBookBorrowed());
+            System.out.println(border);
             return;
         }
         
@@ -177,11 +147,13 @@ public class Library{
         System.out.println(border);
         if (!userHash.containsKey(userId)) {
             System.out.println("Error: User ID " + userId + " does not exist.");
+            System.out.println(border);
             return;
         }
         
         if (!bookHash.containsKey(bookIsbn)) {
             System.out.println("Error: Book with ISBN " + bookIsbn + " does not exist.");
+            System.out.println(border);
             return;
         }
         
@@ -190,11 +162,13 @@ public class Library{
         
         if (!book.isBookBorrowed()) {
             System.out.println("Error: " + book.getBookTitle() + " is not currently borrowed.");
+            System.out.println(border);
             return;
         }
         
         if (!book.getBorrowerId().equals(userId)) {
             System.out.println("Error: " + book.getBookTitle() + " was borrowed by user " + book.getBorrowerId() + ", not by " + userId + ".");
+            System.out.println(border);
             return;
         }
         
@@ -205,7 +179,7 @@ public class Library{
         System.out.println(border);
     }
 
-    /* 
+    
     private void populateBooksList(){
         try {
             File bookFile = new File("books.txt");
@@ -223,9 +197,7 @@ public class Library{
             e.printStackTrace();
         }
     }
-    */
-
-    /*
+    
     private void populateUserList(){
         try {
             File bookFile = new File("users.txt");
@@ -243,5 +215,4 @@ public class Library{
             e.printStackTrace();
         }
     }
-    */
 }
